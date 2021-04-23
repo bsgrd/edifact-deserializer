@@ -1,7 +1,5 @@
 package com.bsgrd.treasurer.edifact.dto;
 
-import com.bsgrd.treasurer.edifact.exception.EdifactFileValidationException;
-
 import static com.bsgrd.treasurer.edifact.dto.SegmentIdentifier.SERVICE_SEGMENT;
 
 public class ServiceSegment {
@@ -61,31 +59,31 @@ public class ServiceSegment {
     }
 
     public String getSegmentIdentifier() {
-        return segmentIdentifier;
+        return this.segmentIdentifier;
     }
 
     public String getCompositeSeparator() {
-        return compositeSeparator;
+        return this.compositeSeparator;
     }
 
     public String getDataSeparator() {
-        return dataSeparator;
+        return this.dataSeparator;
     }
 
     public String getDecimalNotation() {
-        return decimalNotation;
+        return this.decimalNotation;
     }
 
     public String getEscapeCharacter() {
-        return escapeCharacter;
+        return this.escapeCharacter;
     }
 
     public String getReservedCharacter() {
-        return reservedCharacter;
+        return this.reservedCharacter;
     }
 
     public String getSegmentTerminator() {
-        return segmentTerminator;
+        return this.segmentTerminator;
     }
 
 }

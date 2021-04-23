@@ -9,13 +9,15 @@ public class Segment {
     private final String segmentIdentifier;
     private final List<DataElement> dataElements;
 
-    public Segment(String segmentIdentifier, List<DataElement> dataElements) {
+    public Segment(final String segmentIdentifier, final List<DataElement> dataElements) {
         this.segmentIdentifier = segmentIdentifier;
         this.dataElements = dataElements;
     }
 
     public static Segment fromString(final String segmentString, final ServiceSegment serviceSegment) {
-        List<String> dataElementStrings = SplitterUtils.split(segmentString, serviceSegment.getDataSeparator(), serviceSegment.getEscapeCharacter());
+        List<String> dataElementStrings = SplitterUtils.split(segmentString,
+                serviceSegment.getDataSeparator(),
+                serviceSegment.getEscapeCharacter());
         List<DataElement> dataElements = new ArrayList<>();
         for (String dataElementString : dataElementStrings) {
             dataElements.add(DataElement.fromString(dataElementString, serviceSegment));
@@ -24,11 +26,11 @@ public class Segment {
     }
 
     public String getSegmentIdentifier() {
-        return segmentIdentifier;
+        return this.segmentIdentifier;
     }
 
     public List<DataElement> getDataElements() {
-        return dataElements;
+        return this.dataElements;
     }
 
 }

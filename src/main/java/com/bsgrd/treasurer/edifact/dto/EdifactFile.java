@@ -4,33 +4,19 @@ import java.util.List;
 
 public class EdifactFile {
     private final ServiceSegment serviceSegment;
-    private final Segment header;
-    private final List<List<Segment>> messages;
-    private final List<Segment> footerSegments;
+    private final List<Segment> segments;
 
-    public EdifactFile(final ServiceSegment serviceSegment,
-                       final Segment header,
-                       final List<List<Segment>> messages,
-                       final List<Segment> footerSegments) {
+    public EdifactFile(final ServiceSegment serviceSegment, final List<Segment> segments) {
         this.serviceSegment = serviceSegment;
-        this.header = header;
-        this.messages = messages;
-        this.footerSegments = footerSegments;
+        this.segments = segments;
     }
 
     public ServiceSegment getServiceSegment() {
         return serviceSegment;
     }
 
-    public Segment getHeader() {
-        return header;
+    public List<Segment> getSegments() {
+        return segments;
     }
 
-    public List<List<Segment>> getMessages() {
-        return messages;
-    }
-
-    public List<Segment> getFooterSegments() {
-        return footerSegments;
-    }
 }
