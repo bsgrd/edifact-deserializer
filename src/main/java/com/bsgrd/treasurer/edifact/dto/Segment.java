@@ -1,5 +1,7 @@
 package com.bsgrd.treasurer.edifact.dto;
 
+import com.bsgrd.treasurer.edifact.util.SplitterUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +15,12 @@ public class Segment {
     }
 
     public static Segment fromString(final String segmentString, final ServiceSegment serviceSegment) {
-        String[] dataElementStrings = segmentString.split(serviceSegment.getDataSeparator());
+        List<String> dataElementStrings = SplitterUtils.split(segmentString, serviceSegment.getDataSeparator(), serviceSegment.getEscapeCharacter());
         List<DataElement> dataElements = new ArrayList<>();
         for (String dataElementString : dataElementStrings) {
             dataElements.add(DataElement.fromString(dataElementString, serviceSegment));
         }
-        return new Segment(dataElementStrings[0], dataElements);
+        return new Segment(dataElementStrings.get(0), dataElements);
     }
 
     public String getSegmentIdentifier() {

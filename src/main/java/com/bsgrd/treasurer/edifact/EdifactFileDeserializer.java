@@ -1,28 +1,30 @@
 package com.bsgrd.treasurer.edifact;
 
+import com.bsgrd.treasurer.edifact.dto.EdifactFileContainer;
 import com.bsgrd.treasurer.edifact.dto.Segment;
+import com.bsgrd.treasurer.edifact.dto.SegmentIdentifier;
 import com.bsgrd.treasurer.edifact.dto.ServiceSegment;
+import com.bsgrd.treasurer.edifact.exception.ValidationException;
+import com.bsgrd.treasurer.edifact.util.SplitterUtils;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EdifactFileReader {
+import static com.bsgrd.treasurer.edifact.dto.SegmentIdentifier.FILE_HEADER;
+
+public class EdifactFileDeserializer {
     private static final int SERVICE_SEGMENT_LENGTH = 9;
 
-    public String readFile(final byte[] fileBytes) {
+    public EdifactFileContainer deserialize(final byte[] fileBytes) throws ValidationException {
         ServiceSegment serviceSegment = ServiceSegment.fromString(extractServiceSegment(fileBytes));
         String fileContents = extractFileContents(fileBytes);
 
-        String[] segmentStrings = fileContents.split(serviceSegment.getSegmentSeparator());
-        List<Segment> segments = new ArrayList<>();
+        List<Segment> segments = extractSegments(fileContents, serviceSegment);
 
-        for (String segmentString : segmentStrings) {
-            segments.add(Segment.fromString(segmentString, serviceSegment));
-        }
-
-        return fileContents;
+        return new EdifactFileContainer(serviceSegment, segments);
     }
 
     private String extractServiceSegment(final byte[] fileBytes) {
@@ -32,9 +34,23 @@ public class EdifactFileReader {
 
     private String extractFileContents(final byte[] fileBytes) {
         byte[] fileContentBytes = Arrays.copyOfRange(fileBytes, SERVICE_SEGMENT_LENGTH, fileBytes.length - SERVICE_SEGMENT_LENGTH);
-        return new String(fileContentBytes, Charset.defaultCharset())
+        return new String(fileContentBytes, StandardCharsets.ISO_8859_1)
                 .replaceAll("\n", "")
                 .replace("\r", "");
+    }
+
+    private List<Segment> extractSegments(final String fileContents, final ServiceSegment serviceSegment) {
+        List<String> segmentStrings = SplitterUtils.split(fileContents,
+                serviceSegment.getSegmentTerminator(),
+                serviceSegment.getEscapeCharacter());
+
+        List<Segment> segments = new ArrayList<>();
+
+        for (String segmentString : segmentStrings) {
+            segments.add(Segment.fromString(segmentString, serviceSegment));
+        }
+
+        return segments;
     }
 
 }

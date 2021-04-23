@@ -1,6 +1,7 @@
 package com.bsgrd.treasurer.edifact.dto;
 
-import java.util.Arrays;
+import com.bsgrd.treasurer.edifact.util.SplitterUtils;
+
 import java.util.List;
 
 public class DataElement {
@@ -11,7 +12,8 @@ public class DataElement {
     }
 
     public static DataElement fromString(final String dataElementString, final ServiceSegment serviceSegment) {
-        return new DataElement(Arrays.asList(dataElementString.split(serviceSegment.getCompositeSeparator())));
+        List<String> compositeDataElements = SplitterUtils.split(dataElementString, serviceSegment.getCompositeSeparator(), serviceSegment.getEscapeCharacter());
+        return new DataElement(compositeDataElements);
     }
 
     public List<String> getCompositeData() {

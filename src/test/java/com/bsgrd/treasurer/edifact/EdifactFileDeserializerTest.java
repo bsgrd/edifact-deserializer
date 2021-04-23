@@ -1,20 +1,32 @@
 package com.bsgrd.treasurer.edifact;
 
-import org.junit.jupiter.api.Assertions;
+import com.bsgrd.treasurer.edifact.dto.EdifactFile;
+import com.bsgrd.treasurer.edifact.dto.EdifactFileContainer;
+import com.bsgrd.treasurer.edifact.dto.Segment;
+import com.bsgrd.treasurer.edifact.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class EdifactFileReaderTest {
+class EdifactFileDeserializerTest {
 
     @Test
-    public void testEdifactFileReader() throws IOException {
+    void testEdifactFileDeserializer() throws IOException, ValidationException {
         byte[] fileBytes = ClassLoader.getSystemResourceAsStream("debmul.edi").readAllBytes();
-        EdifactFileReader edifactFileReader = new EdifactFileReader();
-        String fileContents = edifactFileReader.readFile(fileBytes);
-        assertNotNull(fileContents);
+        EdifactFileDeserializer edifactFileDeserializer = new EdifactFileDeserializer();
+        EdifactFileContainer edifactFile = edifactFileDeserializer.deserialize(fileBytes);
+        assertNotNull(edifactFile);
+    }
+
+    @Test
+    void testStuff() {
+        byte[] bytes = "\n".getBytes();
+        byte[] cr = "\r".getBytes();
+        byte[] unb = "UNB".getBytes();
+        assertNotNull(bytes);
     }
 
 }
