@@ -1,4 +1,4 @@
-# treasurer-edifact
+# edifact-deserializer
 
 Library for deserialization of EDIFACT files (eg. CREMUL, FINSTA, DEBMUL)
 
