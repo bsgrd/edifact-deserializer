@@ -1,5 +1,7 @@
 package com.bsgrd.treasurer.edifact.dto;
 
+import com.bsgrd.treasurer.edifact.exception.EdifactDeserializationException;
+
 import static com.bsgrd.treasurer.edifact.dto.SegmentIdentifier.SERVICE_SEGMENT;
 
 public class ServiceSegment {
@@ -27,7 +29,7 @@ public class ServiceSegment {
         this.segmentTerminator = segmentTerminator;
     }
 
-    public static ServiceSegment fromString(final String segmentString) throws EdifactFileValidationException {
+    public static ServiceSegment fromString(final String segmentString) throws EdifactDeserializationException {
         try {
             String segmentIdentifier = segmentString.substring(0, 3);
             String compositeDataElementSeparator = segmentString.substring(3, 4);
@@ -38,8 +40,8 @@ public class ServiceSegment {
             String segmentSeparator = segmentString.substring(8, 9);
 
             if (!SERVICE_SEGMENT.getIdentifier().equals(segmentIdentifier)) {
-                throw EdifactFileValidationException
-                        .fromTemplate("Failed to parse service segment; Service segment identifier is not equal to %s.", SERVICE_SEGMENT);
+                String messageTemplate = "Failed to parse service segment; Service segment identifier is not equal to %s.";
+                throw EdifactDeserializationException.fromTemplate(messageTemplate, SERVICE_SEGMENT);
             }
 
             return new ServiceSegment(
@@ -51,10 +53,10 @@ public class ServiceSegment {
                     reservedCharacter,
                     segmentSeparator
             );
-        } catch (EdifactFileValidationException e) {
+        } catch (EdifactDeserializationException e) {
             throw e;
         } catch (Exception e) {
-            throw new EdifactFileValidationException("Failed to parse service segment.", e);
+            throw new EdifactDeserializationException("Failed to parse service segment.", e);
         }
     }
 

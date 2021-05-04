@@ -3,6 +3,7 @@ package com.bsgrd.treasurer.edifact;
 import com.bsgrd.treasurer.edifact.dto.EdifactFile;
 import com.bsgrd.treasurer.edifact.dto.Segment;
 import com.bsgrd.treasurer.edifact.dto.ServiceSegment;
+import com.bsgrd.treasurer.edifact.exception.EdifactDeserializationException;
 import com.bsgrd.treasurer.edifact.util.SplitterUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -12,17 +13,28 @@ import java.util.List;
 
 public class EdifactFileDeserializer {
     private static final int SERVICE_SEGMENT_LENGTH = 9;
+    private ServiceSegment serviceSegment;
 
-    public EdifactFile deserialize(final byte[] fileBytes) {
-        ServiceSegment serviceSegment = ServiceSegment.fromString(extractServiceSegment(fileBytes));
-        String fileContents = extractFileContents(fileBytes);
-
-        List<Segment> segments = extractSegments(fileContents, serviceSegment);
-
-        return new EdifactFile(serviceSegment, segments);
+    public EdifactFileDeserializer() {
     }
 
-    private String extractServiceSegment(final byte[] fileBytes) {
+    public EdifactFileDeserializer(final ServiceSegment serviceSegment) {
+        this.serviceSegment = serviceSegment;
+    }
+
+    public EdifactFile deserialize(final byte[] fileBytes) throws EdifactDeserializationException {
+        if (this.serviceSegment == null) {
+            this.serviceSegment = ServiceSegment.fromString(extractServiceSegmentString(fileBytes));
+        }
+
+        String fileContents = extractFileContents(fileBytes);
+
+        List<Segment> segments = extractSegments(fileContents, this.serviceSegment);
+
+        return new EdifactFile(this.serviceSegment, segments);
+    }
+
+    private String extractServiceSegmentString(final byte[] fileBytes) {
         byte[] serviceSegmentBytes = Arrays.copyOfRange(fileBytes, 0, SERVICE_SEGMENT_LENGTH);
         return new String(serviceSegmentBytes, StandardCharsets.ISO_8859_1);
     }

@@ -1,13 +1,7 @@
 package com.bsgrd.treasurer.edifact.dto;
 
 public enum SegmentIdentifier {
-    SERVICE_SEGMENT("UNA"),
-    FILE_HEADER("UNB"),
-    MESSAGE_HEADER("UNH"),
-    LINE_HEADER("LIN"),
-    SEQUENCE_HEADER("SEQ"),
-    MESSAGE_FOOTER("UNT"),
-    FILE_FOOTER("UNZ");
+    SERVICE_SEGMENT("UNA");
 
     private final String identifier;
 
@@ -16,6 +10,6 @@ public enum SegmentIdentifier {
     }
 
     public String getIdentifier() {
-        return identifier;
+        return this.identifier;
     }
 }
