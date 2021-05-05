@@ -22,7 +22,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build, test and release with gradle
+      - name: Release with gradle
         env:
           SIGNING_SECRET_KEY: ${{ secrets.SIGNING_SECRET_KEY }}
           SIGNING_SECRET_KEY_PASSWORD: ${{ secrets.SIGNING_SECRET_KEY_PASSWORD }}
