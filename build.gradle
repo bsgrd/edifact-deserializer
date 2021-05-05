@@ -3,10 +3,11 @@ plugins {
     id 'maven-publish'
     id 'maven'
     id 'signing'
+    id 'net.nemerosa.versioning' version '2.14.0'
 }
 
 group 'com.bsgrd.treasurer'
-version '1.0.1-SNAPSHOT'
+version versioning.info.lastTag
 
 repositories {
     mavenCentral()
