@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.bsgrd.treasurer'
-version versioning.info.lastTag
+version versioning.info.tag
 
 repositories {
     mavenCentral()
