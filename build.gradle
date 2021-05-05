@@ -36,7 +36,7 @@ artifacts {
 
 signing {
     sign configurations.archives
-    if (project.hasProperty('SIGNING_SECRET_KEY') && project.hasProperty('SIGNING_SECRET_KEY_PASSWORD')) {
+    if (System.getenv('SIGNING_SECRET_KEY') != null && System.getenv('SIGNING_SECRET_KEY_PASSWORD') != null) {
         useInMemoryPgpKeys(System.getenv("SIGNING_SECRET_KEY"), System.getenv("SIGNING_SECRET_KEY_PASSWORD"))
     }
 }
