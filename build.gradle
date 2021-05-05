@@ -1,29 +1,86 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'maven'
+    id 'signing'
 }
 
 group 'com.bsgrd.treasurer'
-version '1.0-SNAPSHOT'
+version '1.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "OSSRH"
-            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-        }
-    }
     publications {
         maven(MavenPublication) {
             from components.java
+        }
+    }
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+    if (project.hasProperty('SIGNING_SECRET_KEY') && project.hasProperty('SIGNING_SECRET_KEY_PASSWORD')) {
+        useInMemoryPgpKeys(System.getenv("SIGNING_SECRET_KEY"), System.getenv("SIGNING_SECRET_KEY_PASSWORD"))
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: System.getenv("MAVEN_USERNAME"), password: System.getenv("MAVEN_PASSWORD"))
+            }
+
+            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: System.getenv("MAVEN_USERNAME"), password: System.getenv("MAVEN_PASSWORD"))
+            }
+
+            pom.project {
+                name 'Treasurer Edifact'
+                packaging 'jar'
+                description 'Deserializer for EDIFACT files.'
+                url 'https://github.com/bsgrd/treasurer-edifact'
+
+                scm {
+                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
+                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
+                    url 'http://foo.googlecode.com/svn/trunk/'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'bsgrd'
+                        name 'Kasper Bisgaard'
+                        email 'kasper.bisgaard@live.com'
+                    }
+                }
+            }
         }
     }
 }
