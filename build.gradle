@@ -61,12 +61,6 @@ uploadArchives {
                 description 'Deserializer for EDIFACT files.'
                 url 'https://github.com/bsgrd/treasurer-edifact'
 
-                scm {
-                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
-                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
-                    url 'http://foo.googlecode.com/svn/trunk/'
-                }
-
                 licenses {
                     license {
                         name 'The Apache License, Version 2.0'
