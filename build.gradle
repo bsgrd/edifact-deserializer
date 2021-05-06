@@ -61,6 +61,12 @@ uploadArchives {
                 description 'Deserializer for EDIFACT files.'
                 url 'https://github.com/bsgrd/treasurer-edifact'
 
+                scm {
+                    connection "scm:git:git://github.com/bsgrd/treasurer-edifact.git"
+                    developerConnection "scm:git:git://github.com/bsgrd/treasurer-edifact.git"
+                    url "https://github.com/bsgrd/treasurer-edifact/tree/main"
+                }
+
                 licenses {
                     license {
                         name 'The Apache License, Version 2.0'
