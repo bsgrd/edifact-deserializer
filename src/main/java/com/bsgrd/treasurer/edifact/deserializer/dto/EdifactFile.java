@@ -1,4 +1,4 @@
-package com.bsgrd.treasurer.edifact.dto;
+package com.bsgrd.treasurer.edifact.deserializer.dto;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ public class EdifactFile {
     }
 
     public ServiceSegment getServiceSegment() {
-        return serviceSegment;
+        return this.serviceSegment;
     }
 
     public List<Segment> getSegments() {
-        return segments;
+        return this.segments;
     }
 
 }

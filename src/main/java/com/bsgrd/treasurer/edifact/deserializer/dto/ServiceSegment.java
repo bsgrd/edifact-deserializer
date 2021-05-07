@@ -1,8 +1,8 @@
-package com.bsgrd.treasurer.edifact.dto;
+package com.bsgrd.treasurer.edifact.deserializer.dto;
 
-import com.bsgrd.treasurer.edifact.exception.EdifactDeserializationException;
+import com.bsgrd.treasurer.edifact.deserializer.exception.EdifactDeserializationException;
 
-import static com.bsgrd.treasurer.edifact.dto.SegmentIdentifier.SERVICE_SEGMENT;
+import static com.bsgrd.treasurer.edifact.deserializer.dto.SegmentIdentifier.SERVICE_SEGMENT;
 
 public class ServiceSegment {
     private final String segmentIdentifier;

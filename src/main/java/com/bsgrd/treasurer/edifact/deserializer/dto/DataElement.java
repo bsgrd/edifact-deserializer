@@ -1,6 +1,6 @@
-package com.bsgrd.treasurer.edifact.dto;
+package com.bsgrd.treasurer.edifact.deserializer.dto;
 
-import com.bsgrd.treasurer.edifact.util.SplitterUtils;
+import com.bsgrd.treasurer.edifact.deserializer.util.SplitterUtils;
 
 import java.util.List;
 
@@ -17,6 +17,6 @@ public class DataElement {
     }
 
     public List<String> getCompositeData() {
-        return compositeData;
+        return this.compositeData;
     }
 }

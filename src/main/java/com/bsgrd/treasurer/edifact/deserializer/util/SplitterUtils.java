@@ -1,4 +1,4 @@
-package com.bsgrd.treasurer.edifact.util;
+package com.bsgrd.treasurer.edifact.deserializer.util;
 
 import java.util.Arrays;
 import java.util.LinkedList;

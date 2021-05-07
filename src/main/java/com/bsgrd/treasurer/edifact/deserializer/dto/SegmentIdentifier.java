@@ -1,4 +1,4 @@
-package com.bsgrd.treasurer.edifact.dto;
+package com.bsgrd.treasurer.edifact.deserializer.dto;
 
 public enum SegmentIdentifier {
     SERVICE_SEGMENT("UNA");

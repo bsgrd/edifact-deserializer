@@ -6,7 +6,7 @@ plugins {
     id 'net.nemerosa.versioning' version '2.14.0'
 }
 
-group 'com.bsgrd.treasurer'
+group 'com.bsgrd.treasurer.edifact'
 version versioning.info.tag
 
 repositories {
@@ -59,12 +59,12 @@ uploadArchives {
                 name 'Treasurer Edifact'
                 packaging 'jar'
                 description 'Deserializer for EDIFACT files.'
-                url 'https://github.com/bsgrd/treasurer-edifact'
+                url 'https://github.com/bsgrd/edifact-deserializer'
 
                 scm {
-                    connection "scm:git:git://github.com/bsgrd/treasurer-edifact.git"
-                    developerConnection "scm:git:git://github.com/bsgrd/treasurer-edifact.git"
-                    url "https://github.com/bsgrd/treasurer-edifact/tree/main"
+                    connection "scm:git:git://github.com/bsgrd/edifact-deserializer.git"
+                    developerConnection "scm:git:git://github.com/bsgrd/edifact-deserializer.git"
+                    url "https://github.com/bsgrd/edifact-deserializer/tree/main"
                 }
 
                 licenses {

@@ -1,10 +1,10 @@
-package com.bsgrd.treasurer.edifact;
+package com.bsgrd.treasurer.edifact.deserializer;
 
-import com.bsgrd.treasurer.edifact.dto.DataElement;
-import com.bsgrd.treasurer.edifact.dto.EdifactFile;
-import com.bsgrd.treasurer.edifact.dto.Segment;
-import com.bsgrd.treasurer.edifact.dto.ServiceSegment;
-import com.bsgrd.treasurer.edifact.exception.EdifactDeserializationException;
+import com.bsgrd.treasurer.edifact.deserializer.dto.DataElement;
+import com.bsgrd.treasurer.edifact.deserializer.dto.EdifactFile;
+import com.bsgrd.treasurer.edifact.deserializer.dto.Segment;
+import com.bsgrd.treasurer.edifact.deserializer.dto.ServiceSegment;
+import com.bsgrd.treasurer.edifact.deserializer.exception.EdifactDeserializationException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

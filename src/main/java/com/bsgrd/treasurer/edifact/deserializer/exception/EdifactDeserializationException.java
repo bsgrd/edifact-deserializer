@@ -1,4 +1,4 @@
-package com.bsgrd.treasurer.edifact.exception;
+package com.bsgrd.treasurer.edifact.deserializer.exception;
 
 public class EdifactDeserializationException extends Exception {
 

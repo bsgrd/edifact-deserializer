@@ -1,10 +1,10 @@
-package com.bsgrd.treasurer.edifact;
+package com.bsgrd.treasurer.edifact.deserializer;
 
-import com.bsgrd.treasurer.edifact.dto.EdifactFile;
-import com.bsgrd.treasurer.edifact.dto.Segment;
-import com.bsgrd.treasurer.edifact.dto.ServiceSegment;
-import com.bsgrd.treasurer.edifact.exception.EdifactDeserializationException;
-import com.bsgrd.treasurer.edifact.util.SplitterUtils;
+import com.bsgrd.treasurer.edifact.deserializer.dto.EdifactFile;
+import com.bsgrd.treasurer.edifact.deserializer.dto.Segment;
+import com.bsgrd.treasurer.edifact.deserializer.dto.ServiceSegment;
+import com.bsgrd.treasurer.edifact.deserializer.exception.EdifactDeserializationException;
+import com.bsgrd.treasurer.edifact.deserializer.util.SplitterUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.bsgrd.treasurer.edifact.dto;
+package com.bsgrd.treasurer.edifact.deserializer.dto;
 
-import com.bsgrd.treasurer.edifact.util.SplitterUtils;
+import com.bsgrd.treasurer.edifact.deserializer.util.SplitterUtils;
 
 import java.util.ArrayList;
 import java.util.List;
