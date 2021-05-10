@@ -9,14 +9,14 @@ Import the library into your existing java project.
 ### Maven
 ```
     <dependency>
-        <groupId>com.bsgrd.treasurer</groupId>
-        <artifactId>edifact-deserializer</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>com.bsgrd.treasurer.edifact</groupId>
+        <artifactId>deserializer</artifactId>
+        <version>2.0.0</version>
     </dependency>
 ```
 ### Gradle
 ```
-    implementation: 'com.bsgrd.treasurer', name: 'edifact-deserializer', version: '1.0-SNAPSHOT'
+    implementation: 'com.bsgrd.treasurer.edifact', name: 'deserializer', version: '2.0.0'
 ```
 
 ## Automatic syntax detection (service segment)
