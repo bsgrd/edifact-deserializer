@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Used for deserialization of EDIFACT files
+ */
 public class EdifactFileDeserializer {
     private static final int SERVICE_SEGMENT_LENGTH = 9;
     private ServiceSegment serviceSegment;
@@ -22,6 +25,13 @@ public class EdifactFileDeserializer {
         this.serviceSegment = serviceSegment;
     }
 
+    /**
+     * Deserialize EDIFACT file bytes into an EdifactFile object with service segment and segment list
+     *
+     * @param fileBytes
+     * @return
+     * @throws EdifactDeserializationException
+     */
     public EdifactFile deserialize(final byte[] fileBytes) throws EdifactDeserializationException {
         if (this.serviceSegment == null) {
             this.serviceSegment = ServiceSegment.fromString(extractServiceSegmentString(fileBytes));
